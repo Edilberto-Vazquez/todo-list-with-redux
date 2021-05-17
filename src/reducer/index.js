@@ -1,12 +1,12 @@
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_TODO":
+    case "UPDATE_TODO":
       return {
         ...state,
         todoList: [...state.todoList, action.payload],
       };
 
-    case "DELETE_FAVORITE":
+    case "DELETE_TODO":
       return {
         ...state,
         todoList: state.todoList.filter((items) => items.id !== action.payload),

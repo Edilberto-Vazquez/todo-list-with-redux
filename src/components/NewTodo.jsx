@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { setTodo } from "../actions";
+import { updateTodo } from "../actions";
 
 const NewTodo = (props) => {
-  const handleSetTodo = (e) => {
-    e.preventDefault();
-    props.setTodo(e.target[0].value);
+  const [todo, setTodo] = useState("");
+
+  const handleSetTodo = (todo) => {
+    props.updateTodo(todo);
   };
 
   return (
-    <>
-      <form onSubmit={handleSetTodo}>
-        <input type="text" />
-        <button>New todo</button>
-      </form>
-    </>
+    <section className="new-todo">
+      <textarea
+        cols="30"
+        rows="10"
+        onChange={(e) => setTodo(e.target.value)}
+        value={todo}
+      ></textarea>
+      <button onClick={() => handleSetTodo(todo)}>New todo</button>
+    </section>
   );
 };
 
 const mapDispatchToProps = {
-  setTodo,
+  updateTodo,
 };
 
 export default connect(null, mapDispatchToProps)(NewTodo);

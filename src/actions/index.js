@@ -1,14 +1,14 @@
-let todoId = 0;
+let newId = 0;
 
-export const setTodo = (todo) => ({
-  type: "SET_TODO",
+export const updateTodo = (newTodo) => ({
+  type: "UPDATE_TODO",
   payload: {
-    id: ++todoId,
-    todo,
+    id: ++newId,
+    todo: newTodo,
   },
 });
 
 export const deleteTodo = (payload) => ({
-  type: "DELETE_FAVORITE",
+  type: "DELETE_TODO",
   payload,
 });
