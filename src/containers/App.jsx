@@ -1,16 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
 import NewTodo from "../components/NewTodo";
 import TodoList from "../components/TodoList";
-//import FilterTodos from "../components/FilterTodos";
 
-const App = () => {
+const App = ({ listFilter }) => {
   return (
     <>
       <NewTodo />
-      <TodoList />
-      {/* <FilterTodos /> */}
+      <TodoList listFilter={listFilter} />
     </>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    list: state.list,
+    listFilter: state.listFilter,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);

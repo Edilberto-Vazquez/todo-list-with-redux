@@ -49,11 +49,4 @@ const mapDispatchToProps = {
   completedTodo,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    list: state.list,
-    listFilter: state.listFilter,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(null, mapDispatchToProps)(TodoList);
