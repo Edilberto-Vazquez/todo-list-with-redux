@@ -4,13 +4,22 @@ import { connect } from "react-redux";
 import { filterList, completedTodo } from "../features/todoList/todoSlice";
 
 const TodoList = ({ listFilter, filterList, completedTodo }) => {
-  const [state, setState] = useState({ completed: "no", condition: "ALL" });
+  // state to change the filter to completed or incompleted
+  const [todoFilter, setTodoFilter] = useState({
+    completed: "no",
+    condition: "ALL",
+  });
+  // state to add a new todo
   const [complete, setComplete] = useState({ id: 0, completed: "no" });
 
   useEffect(() => {
+    // actions to change the values of list and listFilter
     completedTodo(complete);
-    filterList({ completed: state.completed, condition: state.condition });
-  }, [state, complete]);
+    filterList({
+      completed: todoFilter.completed,
+      condition: todoFilter.condition,
+    });
+  }, [todoFilter, complete]);
 
   return (
     <section className="todo-list">
@@ -26,16 +35,22 @@ const TodoList = ({ listFilter, filterList, completedTodo }) => {
       <br />
       <br />
       <div>
-        <button onClick={() => setState({ completed: "no", condition: "ALL" })}>
+        <button
+          onClick={() => setTodoFilter({ completed: "no", condition: "ALL" })}
+        >
           All
         </button>
         <button
-          onClick={() => setState({ completed: "yes", condition: "COMPLETED" })}
+          onClick={() =>
+            setTodoFilter({ completed: "yes", condition: "COMPLETED" })
+          }
         >
           Completed
         </button>
         <button
-          onClick={() => setState({ completed: "no", condition: "INCOMPLETE" })}
+          onClick={() =>
+            setTodoFilter({ completed: "no", condition: "INCOMPLETE" })
+          }
         >
           Incomplete
         </button>

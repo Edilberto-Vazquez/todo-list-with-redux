@@ -4,6 +4,7 @@ import NewTodo from "../components/NewTodo";
 import TodoList from "../components/TodoList";
 
 const App = ({ listFilter }) => {
+  // states are passed to the TodoList component
   return (
     <>
       <NewTodo />

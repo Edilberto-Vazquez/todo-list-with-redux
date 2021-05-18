@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let newId = 0;
+// variables to add a id
+let newId1 = 0;
 let newId2 = 0;
 
-const todoState = (list, action) => {
+// function to set a todo as completed or incomplete
+const todoState = (list, id, completed) => {
   return list.map((item) => {
-    if (item.id !== action.id) {
+    if (item.id !== id) {
       return item;
     }
-    return { ...item, completed: action.completed };
+    return { ...item, completed: completed };
   });
 };
 
+// function to filter the todos
 const filterTodos = (list, condition, completed) => {
   if (condition === "COMPLETED") {
     return list.filter((items) => items.completed === completed);
@@ -23,6 +26,9 @@ const filterTodos = (list, condition, completed) => {
 };
 
 export const slice = createSlice({
+  // state initialitated
+  // two lists are created one to save the values
+  // and other to filter the requested values
   name: "todoList",
   initialState: {
     list: [],
@@ -30,8 +36,9 @@ export const slice = createSlice({
   },
 
   reducers: {
+    // action to set a new todo
     addTodo: (state, action) => {
-      state.list.push({ id: ++newId, todo: action.payload, completed: "no" });
+      state.list.push({ id: ++newId1, todo: action.payload, completed: "no" });
       state.listFilter.push({
         id: ++newId2,
         todo: action.payload,
@@ -39,10 +46,16 @@ export const slice = createSlice({
       });
     },
 
+    // action to change the value to yes or no
     completedTodo: (state, action) => {
-      state.list = todoState(state.list, action.payload);
+      state.list = todoState(
+        state.list,
+        action.payload.id,
+        action.payload.completed
+      );
     },
 
+    // action to filter
     filterList: (state, action) => {
       state.condition = action.payload.condition;
       state.listFilter = filterTodos(
@@ -54,6 +67,7 @@ export const slice = createSlice({
   },
 });
 
+// actions exported
 export const { addTodo, completedTodo, filterList } = slice.actions;
 
 export default slice.reducer;

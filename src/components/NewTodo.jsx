@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { addTodo } from "../features/todoList/todoSlice";
 
 const NewTodo = ({ addTodo }) => {
+  //this componet adds a todo with the action addTodo from todoSlice
+
   const [todo, setTodo] = useState("");
 
   return (
