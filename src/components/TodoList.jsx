@@ -1,43 +1,22 @@
 import React from "react";
 import "../styles/components/TodoList.css";
 import { connect } from "react-redux";
-import { completed, incomplete } from "../actions/index";
 import Todo from "../components/Todo";
 
-const TodoList = (props) => {
-  const { todosFilter } = props;
-
-  // functions to set a task as completed or incompleted
-  const handleCompleted = (id) => {
-    props.completed(id);
-  };
-
-  const handleIncomplete = (id) => {
-    props.incomplete(id);
-  };
-
-  // component with a function map, that goes through the list and draw its items
+const TodoList = ({ todosFilter }) => {
   return (
     <section className="todo-list">
       {todosFilter.map((item) => {
-        return (
-          // Props and functions are passed to the Todo component
-          <Todo
-            key={item.id}
-            todo={item}
-            completed={handleCompleted}
-            incomplete={handleIncomplete}
-          />
-        );
+        return <Todo key={item.id} todo={item} />;
       })}
     </section>
   );
 };
 
-// conexion created with the store
-const mapDispatchToProps = {
-  incomplete,
-  completed,
+const mapStateToProps = (state) => {
+  return {
+    todosFilter: state.todosFilter,
+  };
 };
 
-export default connect(null, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, null)(TodoList);

@@ -23,7 +23,6 @@ const NewTodo = (props) => {
   );
 };
 
-// conexion created with the store
 const mapDispatchToProps = {
   addTodo,
 };
