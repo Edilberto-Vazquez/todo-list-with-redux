@@ -17,17 +17,7 @@ const TodoList = ({ listFilter, filterList, completedTodo }) => {
       <br />
 
       <div>
-        {listFilter.length > 0 && state.condition === "ALL"
-          ? listFilter.map((item) => {
-              return <Todo key={item.id} todo={item} completed={setComplete} />;
-            })
-          : null}
-        {listFilter.length > 0 && state.condition === "COMPLETED"
-          ? listFilter.map((item) => {
-              return <Todo key={item.id} todo={item} completed={setComplete} />;
-            })
-          : null}
-        {listFilter.length > 0 && state.condition === "INCOMPLETE"
+        {listFilter.length > 0
           ? listFilter.map((item) => {
               return <Todo key={item.id} todo={item} completed={setComplete} />;
             })
@@ -54,11 +44,9 @@ const TodoList = ({ listFilter, filterList, completedTodo }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filterList: (obj) => dispatch(filterList(obj)),
-    completedTodo: (id) => dispatch(completedTodo(id)),
-  };
+const mapDispatchToProps = {
+  filterList,
+  completedTodo,
 };
 
 const mapStateToProps = (state) => {
