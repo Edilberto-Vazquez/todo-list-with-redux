@@ -5,10 +5,15 @@ import { createStore } from "redux";
 import reducer from "./reducer";
 import App from "./containers/App";
 
+// todosArray save all created items
+// todosFilter save only items with the indicated filter
+
 const initialState = {
-  todoList: [],
+  todosArray: [],
+  todosFilter: [],
 };
 
+// store is created with todosArray and todosfilter
 const store = createStore(reducer, initialState);
 
 ReactDOM.render(

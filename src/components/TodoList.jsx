@@ -1,37 +1,43 @@
 import React from "react";
 import "../styles/components/TodoList.css";
-import checked from "../assets/icons/checked.svg";
-import deleted from "../assets/icons/x-button.svg";
 import { connect } from "react-redux";
-import { deleteTodo } from "../actions/index";
+import { completed, incomplete } from "../actions/index";
+import Todo from "../components/Todo";
 
 const TodoList = (props) => {
-  const { todoList } = props;
-  const handleDeleteTodo = (id) => {
-    props.deleteTodo(id);
+  const { todosFilter } = props;
+
+  // functions to set a task as completed or incompleted
+  const handleCompleted = (id) => {
+    props.completed(id);
   };
+
+  const handleIncomplete = (id) => {
+    props.incomplete(id);
+  };
+
+  // component with a function map, that goes through the list and draw its items
   return (
     <section className="todo-list">
-      {todoList.map((item) => {
+      {todosFilter.map((item) => {
         return (
-          <div key={item.id} className="todo-item">
-            <span>{item.todo}</span>
-            <img src={checked} alt="Delete" />
-            <img
-              onClick={() => handleDeleteTodo(item.id)}
-              src={deleted}
-              alt="Completed"
-            />
-            {/* <button onClick={() => handleDeleteTodo(item.id)}>borrar</button> */}
-          </div>
+          // Props and functions are passed to the Todo component
+          <Todo
+            key={item.id}
+            todo={item}
+            completed={handleCompleted}
+            incomplete={handleIncomplete}
+          />
         );
       })}
     </section>
   );
 };
 
+// conexion created with the store
 const mapDispatchToProps = {
-  deleteTodo,
+  incomplete,
+  completed,
 };
 
 export default connect(null, mapDispatchToProps)(TodoList);

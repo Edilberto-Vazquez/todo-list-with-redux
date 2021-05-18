@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { updateTodo } from "../actions";
+import { addTodo } from "../actions";
 
 const NewTodo = (props) => {
+  // state to extract the value from the input
   const [todo, setTodo] = useState("");
 
+  // function to add a todo in todosArray
   const handleSetTodo = (todo) => {
-    props.updateTodo(todo);
+    props.addTodo(todo);
   };
 
   return (
     <section className="new-todo">
-      <textarea
-        cols="30"
-        rows="10"
+      <input
+        type="text"
         onChange={(e) => setTodo(e.target.value)}
         value={todo}
-      ></textarea>
+      />
       <button onClick={() => handleSetTodo(todo)}>New todo</button>
     </section>
   );
 };
 
+// conexion created with the store
 const mapDispatchToProps = {
-  updateTodo,
+  addTodo,
 };
 
 export default connect(null, mapDispatchToProps)(NewTodo);

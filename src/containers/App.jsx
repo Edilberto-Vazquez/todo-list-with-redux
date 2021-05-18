@@ -3,19 +3,23 @@ import "../styles/App.css";
 import { connect } from "react-redux";
 import NewTodo from "../components/NewTodo";
 import TodoList from "../components/TodoList";
+import Filters from "../components/Filters";
 
-const App = ({ todoList }) => {
+const App = ({ todosFilter }) => {
+  // todosFilter is passed as a parameter to TodoList
   return (
     <>
       <NewTodo />
-      <TodoList todoList={todoList} />
+      <TodoList todosFilter={todosFilter} />
+      <Filters />
     </>
   );
 };
 
+// conexion created with the store
 const mapStateToProps = (state) => {
   return {
-    todoList: state.todoList,
+    todosFilter: state.todosFilter,
   };
 };
 
