@@ -4,7 +4,8 @@ import { completed, incomplete } from "../actions/index";
 
 const Todo = ({ todo, completed, incomplete }) => (
   <div className="todo-item">
-    <span>{todo.todo}</span>
+    <span>* {todo.todo}</span>
+    <span>completed: {todo.completed}</span>
     <button onClick={() => completed(todo.id)}>Complete</button>
     <button onClick={() => incomplete(todo.id)}>Incomplete</button>
   </div>

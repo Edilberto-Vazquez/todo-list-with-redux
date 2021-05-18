@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/components/TodoList.css";
-import { connect } from "react-redux";
 import Todo from "../components/Todo";
 
 const TodoList = ({ todosFilter }) => {
@@ -13,10 +12,4 @@ const TodoList = ({ todosFilter }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    todosFilter: state.todosFilter,
-  };
-};
-
-export default connect(mapStateToProps, null)(TodoList);
+export default TodoList;

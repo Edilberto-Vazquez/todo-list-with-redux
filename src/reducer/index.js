@@ -1,10 +1,23 @@
 const reducer = (state, action) => {
-  // function to create a copy of todosArray and use it with the filters
-  const allTodos = (todos) => {
-    return todos.map((item) => item);
+  // function to filter todoArray
+  const allTodos = (todos, condition) => {
+    if (condition === "FILTER_COMPLETED") {
+      return todos.filter((items) => items.completed === action.payload);
+    } else if (condition === "FILTER_INCOMPLETE") {
+      return todos.filter((items) => items.completed === action.payload);
+    } else {
+      return todos;
+    }
   };
 
-  const todoList = allTodos(state.todosArray);
+  const todoState = (condition) => {
+    return state.todosArray.map((item) => {
+      if (item.id !== action.payload) {
+        return item;
+      }
+      return { ...item, completed: condition };
+    });
+  };
 
   switch (action.type) {
     // new item is added
@@ -20,12 +33,7 @@ const reducer = (state, action) => {
     case "INCOMPLETE": {
       return {
         ...state,
-        todosArray: state.todosArray.map((item) => {
-          if (item.id !== action.payload) {
-            return item;
-          }
-          return { ...item, completed: false };
-        }),
+        todosArray: todoState("no"),
       };
     }
 
@@ -33,12 +41,7 @@ const reducer = (state, action) => {
     case "COMPLETED": {
       return {
         ...state,
-        todosArray: state.todosArray.map((item) => {
-          if (item.id !== action.payload) {
-            return item;
-          }
-          return { ...item, completed: true };
-        }),
+        todosArray: todoState("yes"),
       };
     }
 
@@ -46,7 +49,7 @@ const reducer = (state, action) => {
     case "FILTER_ALL": {
       return {
         ...state,
-        todosFilter: todoList,
+        todosFilter: allTodos(state.todosArray),
       };
     }
 
@@ -54,9 +57,7 @@ const reducer = (state, action) => {
     case "FILTER_COMPLETED": {
       return {
         ...state,
-        todosFilter: todoList.filter(
-          (items) => items.completed === action.payload
-        ),
+        todosFilter: allTodos(state.todosArray, "FILTER_COMPLETED"),
       };
     }
 
@@ -64,9 +65,7 @@ const reducer = (state, action) => {
     case "FILTER_INCOMPLETE": {
       return {
         ...state,
-        todosFilter: todoList.filter(
-          (items) => items.completed === action.payload
-        ),
+        todosFilter: allTodos(state.todosArray, "FILTER_INCOMPLETE"),
       };
     }
 

@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTodo } from "../actions";
 
-const NewTodo = (props) => {
+const NewTodo = ({ addTodo }) => {
   // state to extract the value from the input
   const [todo, setTodo] = useState("");
-
-  // function to add a todo in todosArray
-  const handleSetTodo = (todo) => {
-    props.addTodo(todo);
-  };
 
   return (
     <section className="new-todo">
@@ -18,13 +13,9 @@ const NewTodo = (props) => {
         onChange={(e) => setTodo(e.target.value)}
         value={todo}
       />
-      <button onClick={() => handleSetTodo(todo)}>New todo</button>
+      <button onClick={() => addTodo(todo)}>New todo</button>
     </section>
   );
 };
 
-const mapDispatchToProps = {
-  addTodo,
-};
-
-export default connect(null, mapDispatchToProps)(NewTodo);
+export default connect(null, { addTodo })(NewTodo);

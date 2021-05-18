@@ -5,7 +5,7 @@ export const addTodo = (newTodo) => ({
   payload: {
     id: ++newId,
     todo: newTodo,
-    completed: false,
+    completed: "no",
   },
 });
 
@@ -25,10 +25,10 @@ export const filterAll = () => ({
 
 export const filterCompleted = () => ({
   type: "FILTER_COMPLETED",
-  payload: true,
+  payload: "yes",
 });
 
 export const filterIncomplete = () => ({
   type: "FILTER_INCOMPLETE",
-  payload: false,
+  payload: "no",
 });
