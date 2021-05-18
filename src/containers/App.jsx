@@ -1,25 +1,16 @@
 import React from "react";
-import "../styles/App.css";
-import { connect } from "react-redux";
 import NewTodo from "../components/NewTodo";
 import TodoList from "../components/TodoList";
-import Filters from "../components/Filters";
+//import FilterTodos from "../components/FilterTodos";
 
-const App = ({ todosFilter, todosArray }) => {
+const App = () => {
   return (
     <>
       <NewTodo />
-      <TodoList todosFilter={todosFilter} />
-      <Filters />
+      <TodoList />
+      {/* <FilterTodos /> */}
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    todosFilter: state.todosFilter,
-    todosArray: state.todosArray,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
+export default App;

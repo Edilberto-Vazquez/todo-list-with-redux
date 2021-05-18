@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import { addTodo } from "../features/todoList/todoSlice";
 
 const NewTodo = ({ addTodo }) => {
-  // state to extract the value from the input
   const [todo, setTodo] = useState("");
 
   return (
-    <section className="new-todo">
+    <section>
       <input
         type="text"
         onChange={(e) => setTodo(e.target.value)}
@@ -18,4 +17,8 @@ const NewTodo = ({ addTodo }) => {
   );
 };
 
-export default connect(null, { addTodo })(NewTodo);
+const mapDispatchToProps = {
+  addTodo,
+};
+
+export default connect(null, mapDispatchToProps)(NewTodo);

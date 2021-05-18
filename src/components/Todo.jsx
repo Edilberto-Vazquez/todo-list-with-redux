@@ -1,19 +1,18 @@
 import React from "react";
-import { connect } from "react-redux";
-import { completed, incomplete } from "../actions/index";
 
-const Todo = ({ todo, completed, incomplete }) => (
-  <div className="todo-item">
-    <span>* {todo.todo}</span>
-    <span>completed: {todo.completed}</span>
-    <button onClick={() => completed(todo.id)}>Complete</button>
-    <button onClick={() => incomplete(todo.id)}>Incomplete</button>
-  </div>
-);
-
-const mapDispatchToProps = {
-  completed,
-  incomplete,
+const Todo = ({ todo, completed }) => {
+  return (
+    <div className="todo-item">
+      <span>* {todo.todo}</span>
+      <span> completed: {todo.completed} </span>
+      <button onClick={() => completed({ id: todo.id, completed: "yes" })}>
+        Complete
+      </button>
+      <button onClick={() => completed({ id: todo.id, completed: "no" })}>
+        Incomplete
+      </button>
+    </div>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(Todo);
+export default Todo;
